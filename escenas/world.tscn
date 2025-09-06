@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://cesvak4rhy2xu"]
+
+[ext_resource type="Script" uid="uid://byp6parbe23ns" path="res://scripts/world.gd" id="1_3f1ia"]
+[ext_resource type="Texture2D" uid="uid://01tjwj45jqrj" path="res://assets/flappy-bird-assets-master/sprites/background-day.png" id="1_7jpok"]
+[ext_resource type="Texture2D" uid="uid://cl2tq026kd2nq" path="res://assets/flappy-bird-assets-master/sprites/base.png" id="2_58mta"]
+[ext_resource type="AudioStream" uid="uid://c4sjcsxqh54l5" path="res://assets/flappy-bird-assets-master/audio/hit.ogg" id="3_d0njd"]
+[ext_resource type="PackedScene" uid="uid://begtdbrqhgabt" path="res://escenas/gui.tscn" id="3_iop0s"]
+[ext_resource type="PackedScene" uid="uid://br5sdg8rupmxb" path="res://escenas/player.tscn" id="3_xsxho"]
+[ext_resource type="PackedScene" uid="uid://cfm38gpbm75to" path="res://escenas/tuberias.tscn" id="4_3f1ia"]
+[ext_resource type="AudioStream" uid="uid://dfxhwfjn25omo" path="res://assets/flappy-bird-assets-master/audio/background song.ogg" id="8_slmik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iop0s"]
+size = Vector2(94.5, 21)
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_3f1ia")
+tuberia_escena = ExtResource("4_3f1ia")
+
+[node name="choque_piso" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_d0njd")
+
+[node name="GUI" parent="." instance=ExtResource("3_iop0s")]
+
+[node name="ParallaxBackground" type="Parallax2D" parent="."]
+repeat_size = Vector2(288, 512)
+autoscroll = Vector2(-30, 0)
+
+[node name="Background-day" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(145, 257)
+texture = ExtResource("1_7jpok")
+
+[node name="Parallaxfloor" type="Parallax2D" parent="."]
+repeat_size = Vector2(336, 112)
+autoscroll = Vector2(-60, 0)
+
+[node name="Base" type="Sprite2D" parent="Parallaxfloor"]
+position = Vector2(149, 491)
+texture = ExtResource("2_58mta")
+
+[node name="Jugador" type="Node2D" parent="."]
+
+[node name="player" parent="." instance=ExtResource("3_xsxho")]
+z_index = 1
+position = Vector2(141, 82)
+
+[node name="Timer_tuberia" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="colision_piso" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="colision_piso"]
+position = Vector2(147.75, 444)
+shape = SubResource("RectangleShape2D_iop0s")
+
+[node name="background_song" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_slmik")
+autoplay = true
+parameters/looping = true
+
+[connection signal="timeout" from="Timer_tuberia" to="." method="_on_timer_tuberia_timeout"]
+[connection signal="body_entered" from="colision_piso" to="." method="_on_colision_piso_body_entered"]

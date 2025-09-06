@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dfxhwfjn25omo"
+path="res://.godot/imported/background song.ogg-f369b8cbc47c31b76be28b7daed9c22a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/flappy-bird-assets-master/audio/background song.ogg"
+dest_files=["res://.godot/imported/background song.ogg-f369b8cbc47c31b76be28b7daed9c22a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

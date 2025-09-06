@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://br5sdg8rupmxb"]
+
+[ext_resource type="Texture2D" uid="uid://dwqsyc6wkcj26" path="res://assets/flappy-bird-assets-master/sprites/bluebird-downflap.png" id="1_j7xnp"]
+[ext_resource type="Texture2D" uid="uid://b5ojvohn8ujs2" path="res://assets/flappy-bird-assets-master/sprites/bluebird-midflap.png" id="2_k4kro"]
+[ext_resource type="Texture2D" uid="uid://qkn2uhap5e7j" path="res://assets/flappy-bird-assets-master/sprites/bluebird-upflap.png" id="3_6nxto"]
+[ext_resource type="Script" uid="uid://sgn1k0ojsu8a" path="res://scripts/player_controler.gd" id="4_k4kro"]
+[ext_resource type="AudioStream" uid="uid://j8phnjxsairw" path="res://assets/flappy-bird-assets-master/audio/wing.ogg" id="5_6nxto"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4kro"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j7xnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k4kro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6nxto")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j7xnp"]
+radius = 11.1803
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("4_k4kro")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k4kro")
+animation = &"Fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+shape = SubResource("CircleShape2D_j7xnp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6nxto")
