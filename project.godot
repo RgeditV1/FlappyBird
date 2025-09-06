@@ -26,7 +26,6 @@ Global="*res://scripts/global.gd"
 window/size/viewport_width=288
 window/size/viewport_height=512
 window/size/resizable=false
-window/size/borderless=true
 window/size/window_width_override=288
 window/size/window_height_override=512
 window/stretch/mode="canvas_items"
